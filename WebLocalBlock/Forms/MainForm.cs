@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebLocalBlock.Forms;
 
 namespace WebLocalBlock
 {
@@ -15,6 +16,11 @@ namespace WebLocalBlock
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
         }
     }
 }
