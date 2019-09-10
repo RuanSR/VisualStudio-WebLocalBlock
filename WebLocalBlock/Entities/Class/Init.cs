@@ -29,7 +29,7 @@ namespace WebLocalBlock.Entities.Class
         {
             try
             {
-                if (!File.Exists(Properties.Resources.RootPathFolder+ "\\"+ Properties.Resources.DBFile))
+                if (!File.Exists(Properties.Resources.RootPathFolder+"\\"+ Properties.Resources.DBFile))
                 {
                     _dbManager.CreateDataBase();
                     _dbManager.CreateTable();

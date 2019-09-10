@@ -133,7 +133,6 @@
             this.grvURL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grvURL.Location = new System.Drawing.Point(3, 16);
             this.grvURL.Name = "grvURL";
-            this.grvURL.ReadOnly = true;
             this.grvURL.RowHeadersVisible = false;
             this.grvURL.Size = new System.Drawing.Size(278, 174);
             this.grvURL.TabIndex = 0;
@@ -142,21 +141,18 @@
             // 
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
             this.ID.Visible = false;
             // 
             // URL
             // 
             this.URL.HeaderText = "URL";
             this.URL.Name = "URL";
-            this.URL.ReadOnly = true;
             this.URL.Width = 150;
             // 
             // Locked
             // 
             this.Locked.HeaderText = "Locked";
             this.Locked.Name = "Locked";
-            this.Locked.ReadOnly = true;
             this.Locked.Width = 55;
             // 
             // Edit
@@ -164,7 +160,6 @@
             this.Edit.HeaderText = "Edit";
             this.Edit.Image = global::WebLocalBlock.Properties.Resources.edit;
             this.Edit.Name = "Edit";
-            this.Edit.ReadOnly = true;
             this.Edit.Width = 35;
             // 
             // Remove
@@ -172,7 +167,6 @@
             this.Remove.HeaderText = "Del.";
             this.Remove.Image = global::WebLocalBlock.Properties.Resources.remove;
             this.Remove.Name = "Remove";
-            this.Remove.ReadOnly = true;
             this.Remove.Width = 35;
             // 
             // dataGridViewImageColumn1
