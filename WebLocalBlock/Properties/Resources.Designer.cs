@@ -61,6 +61,15 @@ namespace WebLocalBlock.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to db_sys.sqlite.
+        /// </summary>
+        internal static string DBFile {
+            get {
+                return ResourceManager.GetString("DBFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap edit {
@@ -77,6 +86,15 @@ namespace WebLocalBlock.Properties {
             get {
                 object obj = ResourceManager.GetObject("remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\R.S.R Software\Web Local Block\.
+        /// </summary>
+        internal static string RootPathFolder {
+            get {
+                return ResourceManager.GetString("RootPathFolder", resourceCulture);
             }
         }
     }

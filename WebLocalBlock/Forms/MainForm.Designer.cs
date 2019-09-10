@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupURL = new System.Windows.Forms.GroupBox();
-            this.tools = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.groupURLs = new System.Windows.Forms.GroupBox();
             this.txtUrl = new System.Windows.Forms.TextBox();
+            this.tools = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAbout = new System.Windows.Forms.ToolStripButton();
+            this.groupURLs = new System.Windows.Forms.GroupBox();
             this.grvURL = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.URL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Locked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remove = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnAbout = new System.Windows.Forms.ToolStripButton();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupURL.SuspendLayout();
             this.tools.SuspendLayout();
             this.groupURLs.SuspendLayout();
@@ -62,6 +62,14 @@
             this.groupURL.TabStop = false;
             this.groupURL.Text = "Search or Add URLS";
             // 
+            // txtUrl
+            // 
+            this.txtUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtUrl.Location = new System.Drawing.Point(3, 16);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(278, 20);
+            this.txtUrl.TabIndex = 0;
+            // 
             // tools
             // 
             this.tools.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -74,10 +82,29 @@
             this.tools.Size = new System.Drawing.Size(284, 25);
             this.tools.TabIndex = 0;
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(49, 22);
+            this.btnAdd.Text = "Add";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
             this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
+            this.btnAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(60, 22);
+            this.btnAbout.Text = "About";
+            this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // groupURLs
             // 
@@ -90,14 +117,6 @@
             this.groupURLs.TabIndex = 2;
             this.groupURLs.TabStop = false;
             this.groupURLs.Text = "URLs";
-            // 
-            // txtUrl
-            // 
-            this.txtUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtUrl.Location = new System.Drawing.Point(3, 16);
-            this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(278, 20);
-            this.txtUrl.TabIndex = 0;
             // 
             // grvURL
             // 
@@ -140,20 +159,6 @@
             this.Locked.ReadOnly = true;
             this.Locked.Width = 55;
             // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.HeaderText = "Edit";
-            this.dataGridViewImageColumn1.Image = global::WebLocalBlock.Properties.Resources.edit;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.Width = 35;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.HeaderText = "Del.";
-            this.dataGridViewImageColumn2.Image = global::WebLocalBlock.Properties.Resources.remove;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.Width = 35;
-            // 
             // Edit
             // 
             this.Edit.HeaderText = "Edit";
@@ -170,24 +175,19 @@
             this.Remove.ReadOnly = true;
             this.Remove.Width = 35;
             // 
-            // btnAdd
+            // dataGridViewImageColumn1
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(49, 22);
-            this.btnAdd.Text = "Add";
-            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.dataGridViewImageColumn1.HeaderText = "Edit";
+            this.dataGridViewImageColumn1.Image = global::WebLocalBlock.Properties.Resources.edit;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Width = 35;
             // 
-            // btnAbout
+            // dataGridViewImageColumn2
             // 
-            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
-            this.btnAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(60, 22);
-            this.btnAbout.Text = "About";
-            this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            this.dataGridViewImageColumn2.HeaderText = "Del.";
+            this.dataGridViewImageColumn2.Image = global::WebLocalBlock.Properties.Resources.remove;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.Width = 35;
             // 
             // MainForm
             // 
@@ -203,6 +203,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WEB<LOCAL>BLOCK";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupURL.ResumeLayout(false);
             this.groupURL.PerformLayout();
             this.tools.ResumeLayout(false);
