@@ -9,7 +9,7 @@ namespace WebLocalBlock.Entities.Class
         private SQLiteCommand _cmd;
         private string QueryCreateTable { get; } = @"CREATE Table Data (ID INTEGER PRIMARY KEY AUTOINCREMENT, URL NVARCHAR(50), Locked BIT)";
         private string QueryReadTable { get; } = @"SELECT * FROM Data";
-        private string QueryInsertTable { get; }
+        private string QueryInsertTable { get; } = @"INSERT INTO Data (URL, Locked) VALUES (@url, @locked)";
         private string QueryUpdateTable { get; }
         private string QueryDeleteTable { get; }
 
@@ -49,15 +49,15 @@ namespace WebLocalBlock.Entities.Class
                 throw new Exception($"Erro ao criar tabelas. Detalhes: {ex.Message}");
             }
         }
-        public DataGridView ReadTable(DataGridView gridView)
+        public DataGridView ReadData(DataGridView gridView)
         {
             try
             {
                 using (SQLiteConnection conn = new SQLiteConnection(Connection))
                 {
                     conn.Open();
-                    _cmd.CommandText = QueryReadTable;
                     _cmd.Connection = conn;
+                    _cmd.CommandText = QueryReadTable;
                     SQLiteDataReader reader = _cmd.ExecuteReader();
                     while (reader.Read())
                     {
@@ -68,12 +68,31 @@ namespace WebLocalBlock.Entities.Class
                             reader.GetValue(reader.GetOrdinal("Locked"))
                         });
                     }
+                    return gridView;
                 }
-                return gridView;
             }
             catch (Exception ex)
             {
                 throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
+            }
+        }
+        public void InsertData(string url, bool locked = false)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(Connection))
+                {
+                    conn.Open();
+                    _cmd.Connection = conn;
+                    _cmd.CommandText = QueryInsertTable;
+                    _cmd.Parameters.Add(new SQLiteParameter("@url", url));
+                    _cmd.Parameters.Add(new SQLiteParameter("@locked", locked));
+                    _cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao inserir dados! Datalhes: {ex.Message}");
             }
         }
     }

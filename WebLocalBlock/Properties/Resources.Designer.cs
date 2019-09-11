@@ -80,6 +80,33 @@ namespace WebLocalBlock.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ATENÇÃO!.
+        /// </summary>
+        internal static string MsgAtention {
+            get {
+                return ResourceManager.GetString("MsgAtention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERRO!.
+        /// </summary>
+        internal static string MsgError {
+            get {
+                return ResourceManager.GetString("MsgError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SUCESSO!.
+        /// </summary>
+        internal static string MsgSuccess {
+            get {
+                return ResourceManager.GetString("MsgSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap remove {

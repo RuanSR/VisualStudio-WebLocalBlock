@@ -90,6 +90,7 @@
             this.btnAdd.Size = new System.Drawing.Size(49, 22);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // toolStripSeparator
             // 

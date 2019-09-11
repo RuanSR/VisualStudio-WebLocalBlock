@@ -130,4 +130,13 @@
   <data name="RootPathFolder" xml:space="preserve">
     <value>C:\R.S.R Software\Web Local Block\</value>
   </data>
+  <data name="MsgAtention" xml:space="preserve">
+    <value>ATENÇÃO!</value>
+  </data>
+  <data name="MsgError" xml:space="preserve">
+    <value>ERRO!</value>
+  </data>
+  <data name="MsgSuccess" xml:space="preserve">
+    <value>SUCESSO!</value>
+  </data>
 </root>

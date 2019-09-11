@@ -7,11 +7,13 @@ namespace WebLocalBlock
 {
     public partial class MainForm : Form
     {
-        private DBManager _dbManager { get; } = new DBManager();
+        private string _Url;
+        private DBManager _dbManager { get; }
         //CONSTRUTOR && LOAD\\
         public MainForm()
         {
             InitializeComponent();
+            _dbManager = new DBManager();
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -22,35 +24,48 @@ namespace WebLocalBlock
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         //BUTTONS\\
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _Url = txtUrl.Text.ToString();
+            try{
+                if (_Url != null && _Url.Contains("www.") && _Url.Contains(".com")){
+                    _dbManager.InsertData(_Url);
+                    LoadDataBase();
+                    MessageBox.Show("Dados inseridos com sucesso!",Properties.Resources.MsgSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Preencha o campo corretamente!", Properties.Resources.MsgAtention, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex){
+                MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnAbout_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
         }
-
         //METODOS\\
         private void LoadDataBase()
         {
             try
             {
-                grvURL = _dbManager.ReadTable(grvURL);
+                grvURL.Rows.Clear();
+                grvURL = _dbManager.ReadData(grvURL);
 
                 foreach (DataGridViewRow row in grvURL.Rows)
                 {
                     DataGridViewCheckBoxCell cell = row.Cells[2] as DataGridViewCheckBoxCell;
-                    //if (cell.Value == cell.TrueValue)
-                    //{
-                    //    MessageBox.Show("");
-                    //}
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message,Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
