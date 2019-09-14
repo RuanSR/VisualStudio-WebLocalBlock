@@ -10,7 +10,7 @@ namespace WebLocalBlock.Entities.Class
         private string QueryCreateTable { get; } = @"CREATE Table Data (ID INTEGER PRIMARY KEY AUTOINCREMENT, URL NVARCHAR(50), Locked BIT)";
         private string QueryReadTable { get; } = @"SELECT * FROM Data";
         private string QueryInsertTable { get; } = @"INSERT INTO Data (URL, Locked) VALUES (@url, @locked)";
-        private string QueryUpdateTable { get; }
+        private string QueryUpdateTable { get; } = @"UPDATE Data SET URL = @url, Locked = @locked WHERE ID = @id";
         private string QueryDeleteTable { get; }
 
         public DBManager()
@@ -93,6 +93,21 @@ namespace WebLocalBlock.Entities.Class
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao inserir dados! Datalhes: {ex.Message}");
+            }
+        }
+        public void UpdateData(int id, string url, bool locked) {
+            try {
+                using (SQLiteConnection conn = new SQLiteConnection(Connection)) {
+                    conn.Open();
+                    _cmd.Connection = conn;
+                    _cmd.CommandText = QueryUpdateTable;
+                    _cmd.Parameters.Add(new SQLiteParameter("@url",url));
+                    _cmd.Parameters.Add(new SQLiteParameter("@locked",locked));
+                    _cmd.Parameters.Add(new SQLiteParameter("@id", id));
+                    _cmd.ExecuteNonQuery();
+                }
+            } catch (Exception ex) {
+                throw new Exception($"Erro ao atualizar dados! Detalhes: {ex.Message}");
             }
         }
     }
