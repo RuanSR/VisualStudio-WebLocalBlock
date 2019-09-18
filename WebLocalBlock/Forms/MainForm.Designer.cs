@@ -36,7 +36,7 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnAbout = new System.Windows.Forms.ToolStripButton();
             this.groupURLs = new System.Windows.Forms.GroupBox();
-            this.dtgUrl = new System.Windows.Forms.DataGridView();
+            this.gridViewUrl = new System.Windows.Forms.DataGridView();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,7 +47,7 @@
             this.groupURL.SuspendLayout();
             this.tools.SuspendLayout();
             this.groupURLs.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgUrl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUrl)).BeginInit();
             this.SuspendLayout();
             // 
             // groupURL
@@ -110,7 +110,7 @@
             // groupURLs
             // 
             this.groupURLs.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupURLs.Controls.Add(this.dtgUrl);
+            this.groupURLs.Controls.Add(this.gridViewUrl);
             this.groupURLs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupURLs.Location = new System.Drawing.Point(0, 69);
             this.groupURLs.Name = "groupURLs";
@@ -119,25 +119,26 @@
             this.groupURLs.TabStop = false;
             this.groupURLs.Text = "URLs";
             // 
-            // dtgUrl
+            // gridViewUrl
             // 
-            this.dtgUrl.AllowUserToAddRows = false;
-            this.dtgUrl.AllowUserToDeleteRows = false;
-            this.dtgUrl.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dtgUrl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgUrl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gridViewUrl.AllowUserToAddRows = false;
+            this.gridViewUrl.AllowUserToDeleteRows = false;
+            this.gridViewUrl.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.gridViewUrl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewUrl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.URL,
             this.Locked,
             this.btnEdit,
             this.btnRemove});
-            this.dtgUrl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtgUrl.Location = new System.Drawing.Point(3, 16);
-            this.dtgUrl.Name = "dtgUrl";
-            this.dtgUrl.RowHeadersVisible = false;
-            this.dtgUrl.Size = new System.Drawing.Size(278, 174);
-            this.dtgUrl.TabIndex = 0;
-            this.dtgUrl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridViewUrl_CellContentClick);
+            this.gridViewUrl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridViewUrl.Location = new System.Drawing.Point(3, 16);
+            this.gridViewUrl.Name = "gridViewUrl";
+            this.gridViewUrl.ReadOnly = true;
+            this.gridViewUrl.RowHeadersVisible = false;
+            this.gridViewUrl.Size = new System.Drawing.Size(278, 174);
+            this.gridViewUrl.TabIndex = 0;
+            this.gridViewUrl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridViewUrl_CellContentClick);
             // 
             // dataGridViewImageColumn1
             // 
@@ -155,20 +156,26 @@
             // 
             // ID
             // 
+            this.ID.DataPropertyName = "ID";
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
             this.ID.Visible = false;
             // 
             // URL
             // 
+            this.URL.DataPropertyName = "URL";
             this.URL.HeaderText = "URL";
             this.URL.Name = "URL";
+            this.URL.ReadOnly = true;
             this.URL.Width = 150;
             // 
             // Locked
             // 
+            this.Locked.DataPropertyName = "Locked";
             this.Locked.HeaderText = "Locked";
             this.Locked.Name = "Locked";
+            this.Locked.ReadOnly = true;
             this.Locked.Width = 45;
             // 
             // btnEdit
@@ -176,6 +183,7 @@
             this.btnEdit.HeaderText = "Edit";
             this.btnEdit.Image = global::WebLocalBlock.Properties.Resources.edit;
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ReadOnly = true;
             this.btnEdit.Width = 35;
             // 
             // btnRemove
@@ -183,6 +191,7 @@
             this.btnRemove.HeaderText = "Del.";
             this.btnRemove.Image = global::WebLocalBlock.Properties.Resources.remove;
             this.btnRemove.Name = "btnRemove";
+            this.btnRemove.ReadOnly = true;
             this.btnRemove.Width = 35;
             // 
             // MainForm
@@ -205,7 +214,7 @@
             this.tools.ResumeLayout(false);
             this.tools.PerformLayout();
             this.groupURLs.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgUrl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewUrl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,7 +229,7 @@
         private System.Windows.Forms.ToolStripButton btnAbout;
         private System.Windows.Forms.GroupBox groupURLs;
         private System.Windows.Forms.TextBox txtUrl;
-        private System.Windows.Forms.DataGridView dtgUrl;
+        private System.Windows.Forms.DataGridView gridViewUrl;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;

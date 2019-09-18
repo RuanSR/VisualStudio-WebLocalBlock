@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using System.Data;
 
 namespace WebLocalBlock.Entities.Class
 {
@@ -11,7 +12,7 @@ namespace WebLocalBlock.Entities.Class
         private string QueryReadTable { get; } = @"SELECT * FROM Data";
         private string QueryInsertTable { get; } = @"INSERT INTO Data (URL, Locked) VALUES (@url, @locked)";
         private string QueryUpdateTable { get; } = @"UPDATE Data SET URL = @url, Locked = @locked WHERE ID = @id";
-        private string QueryDeleteTable { get; }
+        private string QueryDeleteTable { get; } = @"DELETE FROM Data WHERE ID = @id";
 
         public DBManager()
         {
@@ -49,7 +50,7 @@ namespace WebLocalBlock.Entities.Class
                 throw new Exception($"Erro ao criar tabelas. Detalhes: {ex.Message}");
             }
         }
-        public DataGridView ReadData(DataGridView gridView)
+        public DataGridView ReadDataOld(DataGridView gridView)
         {
             try
             {
@@ -73,6 +74,20 @@ namespace WebLocalBlock.Entities.Class
             }
             catch (Exception ex)
             {
+                throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
+            }
+        }
+        public DataTable ReadData() {
+            DataTable dadosTabela = new DataTable();
+            try {
+                using (SQLiteConnection conn = new SQLiteConnection(Connection)) {
+                    conn.Open();
+                    _cmd.Connection = conn;
+                    _cmd.CommandText = QueryReadTable;
+                    dadosTabela.Load(_cmd.ExecuteReader());
+                    return dadosTabela;
+                }
+            } catch (Exception ex) {
                 throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
             }
         }
@@ -108,6 +123,19 @@ namespace WebLocalBlock.Entities.Class
                 }
             } catch (Exception ex) {
                 throw new Exception($"Erro ao atualizar dados! Detalhes: {ex.Message}");
+            }
+        }
+        public void DeleteData(int id) {
+            try {
+                using (SQLiteConnection conn = new SQLiteConnection(Connection)) {
+                    conn.Open();
+                    _cmd.Connection = conn;
+                    _cmd.CommandText = QueryDeleteTable;
+                    _cmd.Parameters.Add(new SQLiteParameter("@id",id));
+                    _cmd.ExecuteNonQuery();
+                }
+            } catch (Exception ex) {
+                throw new Exception($"Erro ao deletar dados! Detalhes: {ex.Message}");
             }
         }
     }

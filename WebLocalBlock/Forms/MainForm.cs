@@ -58,19 +58,47 @@ namespace WebLocalBlock {
             new AboutBox().ShowDialog();
         }
         private void gridViewUrl_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (dtgUrl.Columns[e.ColumnIndex].Name == "btnEdit") {
-                btnAdd.Text = "Update";
-                txtUrl.Text = dtgUrl.Rows[e.RowIndex].Cells["URL"].Value.ToString();
-                _SelectedID = int.Parse(dtgUrl.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+
+            _SelectedID = int.Parse(gridViewUrl.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+
+            switch (gridViewUrl.Columns[e.ColumnIndex].Name) {
+                case "btnEdit":
+                    btnAdd.Text = "Update";
+                    txtUrl.Text = gridViewUrl.Rows[e.RowIndex].Cells["URL"].Value.ToString();
+                    break;
+                case "btnRemove":
+                    if (MessageBox.Show("Deseja realmente remover este url?", Properties.Resources.MsgAtention, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                        try {
+                            _dbManager.DeleteData(_SelectedID);
+                            LoadDataBase();
+                            MessageBox.Show("URL removido com sucesso!", Properties.Resources.MsgSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                        } catch (Exception ex) {
+                            MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
         //METODOS\\
+        private void LoadDataBaseOld() {
+            try {
+                gridViewUrl.Rows.Clear();
+                //gridViewUrl = _dbManager.ReadData(gridViewUrl);
+
+                foreach (DataGridViewRow row in gridViewUrl.Rows) {
+                    DataGridViewCheckBoxCell cell = row.Cells[2] as DataGridViewCheckBoxCell;
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void LoadDataBase() {
             try {
-                dtgUrl.Rows.Clear();
-                dtgUrl = _dbManager.ReadData(dtgUrl);
+                gridViewUrl.DataSource = _dbManager.ReadData();
 
-                foreach (DataGridViewRow row in dtgUrl.Rows) {
+                foreach (DataGridViewRow row in gridViewUrl.Rows) {
                     DataGridViewCheckBoxCell cell = row.Cells[2] as DataGridViewCheckBoxCell;
                 }
             } catch (Exception ex) {
