@@ -159,7 +159,6 @@
             this.ID.DataPropertyName = "ID";
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
             this.ID.Visible = false;
             // 
             // URL
@@ -167,15 +166,15 @@
             this.URL.DataPropertyName = "URL";
             this.URL.HeaderText = "URL";
             this.URL.Name = "URL";
-            this.URL.ReadOnly = true;
             this.URL.Width = 150;
             // 
             // Locked
             // 
             this.Locked.DataPropertyName = "Locked";
+            this.Locked.FalseValue = "";
             this.Locked.HeaderText = "Locked";
             this.Locked.Name = "Locked";
-            this.Locked.ReadOnly = true;
+            this.Locked.TrueValue = "";
             this.Locked.Width = 45;
             // 
             // btnEdit
@@ -183,7 +182,6 @@
             this.btnEdit.HeaderText = "Edit";
             this.btnEdit.Image = global::WebLocalBlock.Properties.Resources.edit;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.ReadOnly = true;
             this.btnEdit.Width = 35;
             // 
             // btnRemove
@@ -191,7 +189,6 @@
             this.btnRemove.HeaderText = "Del.";
             this.btnRemove.Image = global::WebLocalBlock.Properties.Resources.remove;
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.ReadOnly = true;
             this.btnRemove.Width = 35;
             // 
             // MainForm

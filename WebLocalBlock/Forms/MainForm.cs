@@ -5,8 +5,10 @@ using WebLocalBlock.Forms;
 
 namespace WebLocalBlock {
     public partial class MainForm : Form {
-        private int _SelectedID;
-        private string _Url;
+        private int _SelectedID { get; set; }
+        private string _Url { get; set; }
+        private bool _IsChecked { get; set; }
+
         private DBManager _dbManager { get; }
         //CONSTRUTOR && LOAD\\
         public MainForm() {
@@ -28,7 +30,7 @@ namespace WebLocalBlock {
                 switch (btnAdd.Text) {
                     case "Add":
                         if (VerificaUrlText(_Url)) {
-                            _dbManager.InsertData(_Url);
+                            _dbManager.InsertData(_Url, _IsChecked);
                             LoadDataBase();
                             txtUrl.Text = string.Empty;
                             MessageBox.Show("Dados inseridos com sucesso!", Properties.Resources.MsgSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -38,7 +40,7 @@ namespace WebLocalBlock {
                         break;
                     case "Update":
                         if (VerificaUrlText(_Url)) {
-                            _dbManager.UpdateData(_SelectedID ,_Url,false);
+                            _dbManager.UpdateData(_SelectedID ,_Url,_IsChecked);
                             LoadDataBase();
                             btnAdd.Text = "Add";
                             txtUrl.Text = string.Empty;
@@ -60,8 +62,11 @@ namespace WebLocalBlock {
         private void gridViewUrl_CellContentClick(object sender, DataGridViewCellEventArgs e) {
 
             _SelectedID = int.Parse(gridViewUrl.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+            _Url = gridViewUrl.Rows[e.RowIndex].Cells["URL"].Value.ToString();
+            _IsChecked = bool.Parse(gridViewUrl.Rows[e.RowIndex].Cells["Locked"].Value.ToString());
 
             switch (gridViewUrl.Columns[e.ColumnIndex].Name) {
+
                 case "btnEdit":
                     btnAdd.Text = "Update";
                     txtUrl.Text = gridViewUrl.Rows[e.RowIndex].Cells["URL"].Value.ToString();
@@ -75,6 +80,17 @@ namespace WebLocalBlock {
                         } catch (Exception ex) {
                             MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+                    }
+                    break;
+                case "Locked":
+                    try
+                    {
+                        _dbManager.UpdateData(_SelectedID, _Url, !_IsChecked);
+                        LoadDataBase();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,Properties.Resources.MsgError,MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
                     break;
                 default:
@@ -99,7 +115,7 @@ namespace WebLocalBlock {
                 gridViewUrl.DataSource = _dbManager.ReadData();
 
                 foreach (DataGridViewRow row in gridViewUrl.Rows) {
-                    DataGridViewCheckBoxCell cell = row.Cells[2] as DataGridViewCheckBoxCell;
+                    DataGridViewCheckBoxCell cell = row.Cells["Locked"] as DataGridViewCheckBoxCell;
                 }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);

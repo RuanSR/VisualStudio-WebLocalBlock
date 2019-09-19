@@ -91,7 +91,7 @@ namespace WebLocalBlock.Entities.Class
                 throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
             }
         }
-        public void InsertData(string url, bool locked = false)
+        public void InsertData(string url, bool locked)
         {
             try
             {
