@@ -37,13 +37,13 @@
             this.btnAbout = new System.Windows.Forms.ToolStripButton();
             this.groupURLs = new System.Windows.Forms.GroupBox();
             this.gridViewUrl = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.URL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Locked = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnRemove = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupURL.SuspendLayout();
             this.tools.SuspendLayout();
             this.groupURLs.SuspendLayout();
@@ -69,6 +69,7 @@
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(278, 20);
             this.txtUrl.TabIndex = 0;
+            this.txtUrl.TextChanged += new System.EventHandler(this.txtUrl_TextChanged);
             // 
             // tools
             // 
@@ -140,6 +141,48 @@
             this.gridViewUrl.TabIndex = 0;
             this.gridViewUrl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridViewUrl_CellContentClick);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // URL
+            // 
+            this.URL.DataPropertyName = "URL";
+            this.URL.HeaderText = "URL";
+            this.URL.Name = "URL";
+            this.URL.ReadOnly = true;
+            this.URL.Width = 150;
+            // 
+            // Locked
+            // 
+            this.Locked.DataPropertyName = "Locked";
+            this.Locked.FalseValue = "";
+            this.Locked.HeaderText = "Locked";
+            this.Locked.Name = "Locked";
+            this.Locked.ReadOnly = true;
+            this.Locked.TrueValue = "";
+            this.Locked.Width = 45;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.HeaderText = "Edit";
+            this.btnEdit.Image = global::WebLocalBlock.Properties.Resources.edit;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ReadOnly = true;
+            this.btnEdit.Width = 35;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.HeaderText = "Del.";
+            this.btnRemove.Image = global::WebLocalBlock.Properties.Resources.remove;
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.ReadOnly = true;
+            this.btnRemove.Width = 35;
+            // 
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.HeaderText = "Edit";
@@ -153,43 +196,6 @@
             this.dataGridViewImageColumn2.Image = global::WebLocalBlock.Properties.Resources.remove;
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.Width = 35;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            // 
-            // URL
-            // 
-            this.URL.DataPropertyName = "URL";
-            this.URL.HeaderText = "URL";
-            this.URL.Name = "URL";
-            this.URL.Width = 150;
-            // 
-            // Locked
-            // 
-            this.Locked.DataPropertyName = "Locked";
-            this.Locked.FalseValue = "";
-            this.Locked.HeaderText = "Locked";
-            this.Locked.Name = "Locked";
-            this.Locked.TrueValue = "";
-            this.Locked.Width = 45;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.HeaderText = "Edit";
-            this.btnEdit.Image = global::WebLocalBlock.Properties.Resources.edit;
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Width = 35;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.HeaderText = "Del.";
-            this.btnRemove.Image = global::WebLocalBlock.Properties.Resources.remove;
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Width = 35;
             // 
             // MainForm
             // 

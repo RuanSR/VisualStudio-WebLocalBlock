@@ -112,7 +112,7 @@ namespace WebLocalBlock {
         }
         private void LoadDataBase() {
             try {
-                gridViewUrl.DataSource = _dbManager.ReadData();
+                gridViewUrl.DataSource = _dbManager.SearchData(txtUrl.Text);
 
                 foreach (DataGridViewRow row in gridViewUrl.Rows) {
                     DataGridViewCheckBoxCell cell = row.Cells["Locked"] as DataGridViewCheckBoxCell;
@@ -127,6 +127,11 @@ namespace WebLocalBlock {
             } else {
                 return false;
             }
+        }
+
+        private void txtUrl_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataBase();
         }
     }
 }

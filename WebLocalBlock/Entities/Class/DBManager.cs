@@ -77,20 +77,20 @@ namespace WebLocalBlock.Entities.Class
                 throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
             }
         }
-        public DataTable ReadData() {
-            DataTable dadosTabela = new DataTable();
-            try {
-                using (SQLiteConnection conn = new SQLiteConnection(Connection)) {
-                    conn.Open();
-                    _cmd.Connection = conn;
-                    _cmd.CommandText = QueryReadTable;
-                    dadosTabela.Load(_cmd.ExecuteReader());
-                    return dadosTabela;
-                }
-            } catch (Exception ex) {
-                throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
-            }
-        }
+        //public DataTable ReadData() {
+        //    DataTable dadosTabela = new DataTable();
+        //    try {
+        //        using (SQLiteConnection conn = new SQLiteConnection(Connection)) {
+        //            conn.Open();
+        //            _cmd.Connection = conn;
+        //            _cmd.CommandText = QueryReadTable;
+        //            dadosTabela.Load(_cmd.ExecuteReader());
+        //            return dadosTabela;
+        //        }
+        //    } catch (Exception ex) {
+        //        throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
+        //    }
+        //}
         public void InsertData(string url, bool locked)
         {
             try
@@ -136,6 +136,26 @@ namespace WebLocalBlock.Entities.Class
                 }
             } catch (Exception ex) {
                 throw new Exception($"Erro ao deletar dados! Detalhes: {ex.Message}");
+            }
+        }
+        public DataTable SearchData(string url = null)
+        {
+            DataTable dadosTabela = new DataTable();
+            string QuerySearchTable = @"SELECT * FROM Data WHERE (URL LIKE '%"+url+"%')";
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(Connection))
+                {
+                    conn.Open();
+                    _cmd.Connection = conn;
+                    _cmd.CommandText = QuerySearchTable;
+                    dadosTabela.Load(_cmd.ExecuteReader());
+                    return dadosTabela;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
             }
         }
     }
