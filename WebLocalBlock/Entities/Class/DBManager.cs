@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Windows.Forms;
 using System.Data;
 
 namespace WebLocalBlock.Entities.Class
@@ -50,33 +49,33 @@ namespace WebLocalBlock.Entities.Class
                 throw new Exception($"Erro ao criar tabelas. Detalhes: {ex.Message}");
             }
         }
-        public DataGridView ReadDataOld(DataGridView gridView)
-        {
-            try
-            {
-                using (SQLiteConnection conn = new SQLiteConnection(Connection))
-                {
-                    conn.Open();
-                    _cmd.Connection = conn;
-                    _cmd.CommandText = QueryReadTable;
-                    SQLiteDataReader reader = _cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        gridView.Rows.Add(new object[]
-                        {
-                            reader.GetValue(reader.GetOrdinal("ID")),
-                            reader.GetValue(reader.GetOrdinal("URL")),
-                            reader.GetValue(reader.GetOrdinal("Locked"))
-                        });
-                    }
-                    return gridView;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
-            }
-        }
+        //public DataGridView ReadDataOld(DataGridView gridView)
+        //{
+        //    try
+        //    {
+        //        using (SQLiteConnection conn = new SQLiteConnection(Connection))
+        //        {
+        //            conn.Open();
+        //            _cmd.Connection = conn;
+        //            _cmd.CommandText = QueryReadTable;
+        //            SQLiteDataReader reader = _cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                gridView.Rows.Add(new object[]
+        //                {
+        //                    reader.GetValue(reader.GetOrdinal("ID")),
+        //                    reader.GetValue(reader.GetOrdinal("URL")),
+        //                    reader.GetValue(reader.GetOrdinal("Locked"))
+        //                });
+        //            }
+        //            return gridView;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Erro na leitura do banco de dados! Detalhes: {ex.Message}");
+        //    }
+        //}
         //public DataTable ReadData() {
         //    DataTable dadosTabela = new DataTable();
         //    try {

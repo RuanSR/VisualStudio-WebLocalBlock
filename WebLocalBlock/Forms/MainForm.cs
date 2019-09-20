@@ -23,7 +23,7 @@ namespace WebLocalBlock {
                 MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //BUTTONS\\
+        //EVENTS\\
         private void btnAdd_Click(object sender, EventArgs e) {
             _Url = txtUrl.Text.ToString();
             try {
@@ -72,24 +72,31 @@ namespace WebLocalBlock {
                     txtUrl.Text = gridViewUrl.Rows[e.RowIndex].Cells["URL"].Value.ToString();
                     break;
                 case "btnRemove":
-                    if (MessageBox.Show("Deseja realmente remover este url?", Properties.Resources.MsgAtention, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                        try {
-                            _dbManager.DeleteData(_SelectedID);
-                            LoadDataBase();
-                            MessageBox.Show("URL removido com sucesso!", Properties.Resources.MsgSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information); 
-                        } catch (Exception ex) {
-                            MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!_IsChecked)
+                    {
+                        if (MessageBox.Show("Deseja realmente remover este url?", Properties.Resources.MsgAtention, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                _dbManager.DeleteData(_SelectedID);
+                                LoadDataBase();
+                                MessageBox.Show("URL removido com sucesso!", Properties.Resources.MsgSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
+                    }else
+                    {
+                        MessageBox.Show("Você não pode remover este url enquanto o mesmo estiver bloqueado!",Properties.Resources.MsgAtention,MessageBoxButtons.OK,MessageBoxIcon.Information);
                     }
                     break;
                 case "Locked":
-                    try
-                    {
+                    try{
                         _dbManager.UpdateData(_SelectedID, _Url, !_IsChecked);
                         LoadDataBase();
-                    }
-                    catch (Exception ex)
-                    {
+                    }catch (Exception ex){
                         MessageBox.Show(ex.Message,Properties.Resources.MsgError,MessageBoxButtons.OK,MessageBoxIcon.Error);
                     }
                     break;
@@ -97,19 +104,11 @@ namespace WebLocalBlock {
                     break;
             }
         }
-        //METODOS\\
-        private void LoadDataBaseOld() {
-            try {
-                gridViewUrl.Rows.Clear();
-                //gridViewUrl = _dbManager.ReadData(gridViewUrl);
-
-                foreach (DataGridViewRow row in gridViewUrl.Rows) {
-                    DataGridViewCheckBoxCell cell = row.Cells[2] as DataGridViewCheckBoxCell;
-                }
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, Properties.Resources.MsgError, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        private void txtUrl_TextChanged(object sender, EventArgs e)
+        {
+            LoadDataBase();
         }
+        //METODOS\\
         private void LoadDataBase() {
             try {
                 gridViewUrl.DataSource = _dbManager.SearchData(txtUrl.Text);
@@ -127,11 +126,6 @@ namespace WebLocalBlock {
             } else {
                 return false;
             }
-        }
-
-        private void txtUrl_TextChanged(object sender, EventArgs e)
-        {
-            LoadDataBase();
         }
     }
 }
